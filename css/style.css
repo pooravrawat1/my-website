@@ -1,0 +1,371 @@
+/* ===================================
+   Mariana Bukvic Style - White Theme
+   JetBrains Mono Font
+   =================================== */
+
+:root {
+    --bg: #ffffff;
+    --text: #1a1a1a;
+    --text-muted: #666666;
+    --accent: #1a1a1a;
+    --font: "Neue Haas Grotesk", -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --border: #e5e5e5;
+}
+
+/* Particles Background */
+#tsparticles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Reset */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    font-size: 14px;
+    min-height: 100vh;
+}
+
+/* Vignette - Removed */
+.vignette {
+    display: none;
+}
+
+/* Page Container */
+.page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 40px 60px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Navigation - Top Right */
+.nav {
+    position: absolute;
+    top: 40px;
+    right: 60px;
+    display: flex;
+    gap: 32px;
+    z-index: 10001;
+}
+
+.nav-link {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.2s ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--text);
+}
+
+/* Main Content */
+.main {
+    flex: 1;
+}
+
+/* Large Initials */
+.initials {
+    font-family: "Neue Haas Grotesk", -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: clamp(60px, 15vw, 120px);
+    font-weight: 400;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    margin-bottom: 60px;
+    color: var(--text);
+    position: sticky;
+    top: 40px;
+    z-index: 10;
+    transform-origin: left center;
+    transition: transform 0.1s ease-out;
+    will-change: transform;
+}
+
+/* Content Grid - Two Columns */
+.content-grid {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 80px;
+    max-width: 1000px;
+}
+
+/* Sidebar - Left Column */
+.sidebar {
+    position: sticky;
+    top: 40px;
+    align-self: start;
+}
+
+.sidebar-block {
+    margin-bottom: 40px;
+}
+
+.sidebar-name {
+    font-weight: 600;
+    margin-bottom: 2px;
+    font-size: 16px;
+}
+
+.sidebar-location {
+    color: var(--text-muted);
+    font-size: 13px;
+}
+
+/* Content - Right Column */
+.content {
+    max-width: 600px;
+}
+
+/* Bio Section */
+.bio {
+    margin-bottom: 60px;
+}
+
+.bio p {
+    margin-bottom: 12px;
+    line-height: 1.5;
+    font-weight: 500;
+}
+
+.bio p:last-child {
+    margin-bottom: 0;
+}
+
+/* Row Sections (Experience, Links) */
+.row {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 40px;
+    margin-bottom: 40px;
+    padding-top: 24px;
+}
+
+.row-label {
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--text);
+}
+
+.row-content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.row-content-inline {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.row-item {
+    color: var(--text);
+    text-decoration: none;
+    transition: color 0.2s ease;
+    line-height: 1.6;
+}
+
+.row-item:hover {
+    color: var(--accent);
+}
+
+/* Intuit Link Styling */
+.intuit-link {
+    cursor: pointer;
+    display: block;
+}
+
+.intuit-link:hover {
+    color: #0077C5 !important;
+}
+
+.intuit-link:hover div {
+    color: #0077C5 !important;
+}
+
+/* TReNDS Center Link Styling */
+.trends-link {
+    cursor: pointer;
+    display: block;
+}
+
+.trends-link:hover {
+    color: #0077C5 !important;
+}
+
+.trends-link:hover div {
+    color: #0077C5 !important;
+}
+
+.link-item {
+    color: var(--text);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color 0.2s ease;
+}
+
+.link-item:hover {
+    color: #0077C5;
+}
+
+.link-item:hover svg {
+    fill: #0077C5;
+}
+
+/* Footer */
+.footer {
+    margin-top: auto;
+    padding-top: 60px;
+    text-align: right;
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+/* Selection */
+::selection {
+    background: var(--accent);
+    color: white;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .page {
+        padding: 30px 40px;
+    }
+
+    .nav {
+        top: 30px;
+        right: 40px;
+    }
+
+    .content-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .sidebar {
+        position: static;
+    }
+
+    .initials {
+        margin-bottom: 40px;
+    }
+}
+
+@media (max-width: 600px) {
+    .page {
+        padding: 24px;
+    }
+
+    .nav {
+        position: static;
+        margin-bottom: 40px;
+        justify-content: flex-start;
+    }
+
+    .initials {
+        font-size: 60px;
+        margin-bottom: 32px;
+    }
+
+    .row {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .row-content-inline {
+        gap: 12px;
+    }
+
+    .footer {
+        text-align: left;
+    }
+}
+
+/* Cursor Follower */
+.cursor-follower {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: rgba(26, 26, 26, 0.1);
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    transition: width 0.3s ease, height 0.3s ease, background 0.3s ease;
+}
+
+.cursor-follower::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 6px;
+    height: 6px;
+    background: rgba(26, 26, 26, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+a:hover ~ .cursor-follower,
+button:hover ~ .cursor-follower {
+    width: 40px;
+    height: 40px;
+    background: rgba(26, 26, 26, 0.05);
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+    }
+
+    html {
+        scroll-behavior: auto;
+    }
+
+    .cursor-follower {
+        display: none;
+    }
+}
