@@ -39,12 +39,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // P-R rotation on scroll
     const initials = document.querySelector('.initials');
+    const sidebarLocation = document.querySelector('.sidebar-location');
     
-    if (initials) {
-        // Calculate scroll thresholds based on viewport
+    if (initials && sidebarLocation) {
+        // Calculate scroll thresholds based on viewport - faster rotation
         const getThresholds = () => ({
-            start: window.innerHeight * 0.1,
-            end: window.innerHeight * 0.6
+            start: window.innerHeight * 0.05,  // Start sooner
+            end: window.innerHeight * 0.25     // End much sooner for faster rotation
         });
         
         let thresholds = getThresholds();
@@ -54,21 +55,33 @@ document.addEventListener('DOMContentLoaded', () => {
             const { start, end } = thresholds;
             
             let rotation = 0;
+            let translateY = 0;
+            let translateX = 0;
             
             if (scrollY < start) {
                 // Before animation starts
                 rotation = 0;
+                translateY = 0;
+                translateX = 0;
             } else if (scrollY >= start && scrollY <= end) {
                 // During transition
                 const rawProgress = (scrollY - start) / (end - start);
                 const progress = 1 - Math.pow(1 - rawProgress, 3); // Cubic ease-out
                 rotation = progress * -90;
+                
+                // Move down slightly - just 40px down from original position
+                translateY = progress * 40;
+                // Shift right slightly when rotating to align with text
+                translateX = progress * 30;
             } else {
-                // After animation completes
+                // After animation completes - keep it just 40px below original position
                 rotation = -90;
+                translateY = 270;
+                translateX = 70;
             }
             
-            initials.style.transform = `rotate(${rotation}deg)`;
+            // Apply translate before rotate to keep it on the left
+            initials.style.transform = `translateX(${translateX}px) translateY(${translateY}px) rotate(${rotation}deg)`;
         });
         
         // Recalculate thresholds on resize
