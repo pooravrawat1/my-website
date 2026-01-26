@@ -314,7 +314,7 @@ body {
     padding: 60px 0;
     display: flex;
     flex-direction: column;
-    gap: 120px;
+    gap: 40px;
     margin-top: 450px;
 }
 
@@ -345,6 +345,7 @@ body {
 }
 
 .project-year {
+    font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, sans-serif;
     font-size: 14px;
     color: var(--text-muted);
     font-weight: 400;
@@ -352,8 +353,9 @@ body {
 }
 
 .project-title {
-    font-size: 32px;
-    font-weight: 400;
+    font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 30px;
+    font-weight: 500;
     color: var(--text);
     line-height: 1.2;
     margin: 0;
@@ -361,6 +363,7 @@ body {
 }
 
 .project-description {
+    font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, sans-serif;
     font-size: 15px;
     line-height: 1.6;
     color: var(--text-muted);
@@ -370,21 +373,20 @@ body {
 
 .project-button {
     width: fit-content;
-    padding: 12px 32px;
-    background: #f5f5f5;
-    border: none;
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: 500;
     color: var(--text);
+    text-decoration: none;
+    background: none;
+    border: none;
+    font-size: 14px;
+    font-weight: 400;
     cursor: pointer;
-    transition: all 0.2s ease;
-    font-family: var(--font);
+    transition: color 0.2s ease;
+    padding: 0;
+    font-family: inherit;
 }
 
 .project-button:hover {
-    background: #e8e8e8;
-    transform: translateY(-1px);
+    color: #0077C5;
 }
 
 .project-right {
@@ -393,9 +395,9 @@ body {
 
 .project-image-placeholder {
     width: 100%;
-    aspect-ratio: 1/1;
+    aspect-ratio: 16/9;
     background: #000000;
-    border-radius: 50%;
+    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -466,12 +468,12 @@ body {
 }
 
 .project-title {
-    font-family: var(--font);
-    font-size: 14px;
-    font-weight: 600;
+    font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 30px;
+    font-weight: 500;
     color: var(--text);
-    letter-spacing: 0;
-    line-height: 1.5;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
     margin: 0;
 }
 
@@ -511,8 +513,8 @@ body {
 .project-image {
     position: relative;
     width: 100%;
-    aspect-ratio: 1/1;
-    border-radius: 50%;
+    aspect-ratio: 16/9;
+    border-radius: 12px;
     background: #000000;
     border: none;
     overflow: hidden;
