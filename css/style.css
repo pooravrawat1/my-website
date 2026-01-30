@@ -218,7 +218,7 @@ body {
 }
 
 .row-item:hover {
-    color: var(--accent);
+    color: #0077C5;
 }
 
 /* Intuit Link Styling */
