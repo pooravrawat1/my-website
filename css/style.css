@@ -94,6 +94,12 @@ body {
     pointer-events: none;
 }
 
+@media (max-width: 900px) {
+    .years-container {
+        display: none;
+    }
+}
+
 .years-dash {
     font-size: 14px;
     color: #000000;
@@ -131,6 +137,14 @@ body {
 .feed-page .initials {
     position: fixed;
     left: 60px;
+}
+
+@media (max-width: 900px) {
+    .feed-page .initials {
+        position: relative;
+        left: auto;
+        margin-bottom: 40px;
+    }
 }
 
 /* Content Grid - Two Columns */
@@ -316,6 +330,21 @@ body {
     flex-direction: column;
     gap: 40px;
     margin-top: 450px;
+}
+
+@media (max-width: 900px) {
+    .projects-section {
+        margin-left: 0;
+        margin-top: 0;
+        padding: 40px 0;
+    }
+}
+
+@media (max-width: 600px) {
+    .projects-section {
+        margin-left: 0;
+        padding: 24px 0;
+    }
 }
 
 /* Project Card */
