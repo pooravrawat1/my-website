@@ -1,16 +1,3 @@
 {
-  "rewrites": [
-    {
-      "source": "/",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/info",
-      "destination": "/info.html"
-    },
-    {
-      "source": "/blog-formalization-of-intelligence",
-      "destination": "/blog-formalization-of-intelligence.html"
-    }
-  ]
+  "cleanUrls": true
 }
