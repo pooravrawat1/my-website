@@ -25,7 +25,7 @@ body {
     background: var(--bg);
     color: var(--text);
     line-height: 1.6;
-    font-size: 14px;
+    font-size: clamp(0.875rem, 1vw, 1rem);
     min-height: 100vh;
     transform: none !important;
 }
@@ -45,8 +45,8 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    padding: 40px 60px;
-    max-width: 1400px;
+    padding: 2.5vw clamp(5px, 1vw, 20px);
+    max-width: min(1400px, 90vw);
     margin: 0 auto;
     transform: none !important;
 }
@@ -54,17 +54,17 @@ body {
 /* Navigation - Top Right */
 .nav {
     position: absolute;
-    top: 40px;
-    right: 60px;
+    top: 2.5vw;
+    right: clamp(5px, 1vw, 20px);
     display: flex;
-    gap: 32px;
+    gap: 2vw;
     z-index: 10001;
 }
 
 .nav-link {
     color: var(--text-muted);
     text-decoration: none;
-    font-size: 14px;
+    font-size: clamp(0.875rem, 1vw, 1rem);
     transition: color 0.2s ease;
 }
 
@@ -82,8 +82,8 @@ body {
 /* Years Container - Right Side */
 .years-container {
     position: absolute !important;
-    right: 60px !important;
-    top: 300px !important;
+    right: clamp(5px, 1vw, 20px) !important;
+    top: clamp(200px, 20vh, 300px) !important;
     z-index: 50;
     display: flex;
     flex-direction: column;
@@ -101,7 +101,7 @@ body {
 }
 
 .years-dash {
-    font-size: 14px;
+    font-size: clamp(0.875rem, 1vw, 1rem);
     color: #000000;
     font-weight: 600;
     line-height: 1;
@@ -109,7 +109,7 @@ body {
 }
 
 .years-label {
-    font-size: 14px;
+    font-size: clamp(0.875rem, 1vw, 1rem);
     color: #000000;
     font-weight: 600;
     letter-spacing: 0.05em;
@@ -122,11 +122,12 @@ body {
     font-weight: 500;
     letter-spacing: -0.02em;
     line-height: 1;
-    margin-bottom: 60px;
-    margin-left: -10px;
+    margin-bottom: clamp(40px, 4vw, 60px);
+    margin-left: calc(-1 * clamp(5px, 1vw, 20px));
+    padding-left: clamp(5px, 2vw, 20px);
     color: var(--text);
     position: sticky;
-    top: 40px;
+    top: 2.5vw;
     z-index: 10;
     transform-origin: left center;
     transition: transform 0.1s ease-out;
@@ -136,7 +137,9 @@ body {
 /* Feed page - Fixed initials */
 .feed-page .initials {
     position: fixed;
-    left: 60px;
+    left: clamp(5px, 2vw, 20px);
+    margin-left: 0;
+    padding-left: 0;
 }
 
 @media (max-width: 900px) {
@@ -150,9 +153,9 @@ body {
 /* Content Grid - Two Columns */
 .content-grid {
     display: grid;
-    grid-template-columns: 200px 1fr;
-    gap: 80px;
-    max-width: 1000px;
+    grid-template-columns: clamp(150px, 15vw, 200px) 1fr;
+    gap: clamp(40px, 6vw, 80px);
+    max-width: min(1000px, 80vw);
 }
 
 /* Sidebar - Now flows with content */
@@ -161,33 +164,33 @@ body {
 }
 
 .sidebar-block {
-    margin-bottom: 30px;
+    margin-bottom: clamp(20px, 2vw, 30px);
 }
 
 .sidebar-name {
     font-weight: 600;
     margin-bottom: 2px;
-    font-size: 16px;
+    font-size: clamp(1rem, 1.2vw, 1.125rem);
 }
 
 .sidebar-location {
     color: var(--text-muted);
-    font-size: 13px;
+    font-size: clamp(0.8125rem, 1vw, 0.9375rem);
 }
 
 /* Content - Right Column */
 .content {
-    max-width: 600px;
+    max-width: min(600px, 60vw);
 }
 
 /* Bio Section */
 .bio {
-    margin-bottom: 60px;
+    margin-bottom: clamp(40px, 4vw, 60px);
 }
 
 .bio p {
-    margin-bottom: 12px;
-    margin-left: 20px;
+    margin-bottom: 0.75rem;
+    margin-left: clamp(1rem, 1.5vw, 1.25rem);
     line-height: 1.5;
     font-weight: 500;
 }
@@ -199,29 +202,29 @@ body {
 /* Row Sections (Experience, Links) */
 .row {
     display: grid;
-    grid-template-columns: 140px 1fr;
-    gap: 40px;
-    margin-bottom: 40px;
-    margin-left: 20px;
-    padding-top: 24px;
+    grid-template-columns: clamp(100px, 10vw, 140px) 1fr;
+    gap: clamp(20px, 3vw, 40px);
+    margin-bottom: clamp(30px, 3vw, 40px);
+    margin-left: clamp(1rem, 1.5vw, 1.25rem);
+    padding-top: 1.5rem;
 }
 
 .row-label {
     font-weight: 700;
-    font-size: 14px;
+    font-size: clamp(0.875rem, 1vw, 1rem);
     color: var(--text);
 }
 
 .row-content {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 0.5rem;
 }
 
 .row-content-inline {
     flex-direction: row;
     flex-wrap: wrap;
-    gap: 16px;
+    gap: 1rem;
 }
 
 .row-item {
@@ -281,9 +284,9 @@ body {
 /* Footer */
 .footer {
     margin-top: auto;
-    padding-top: 60px;
+    padding-top: clamp(40px, 4vw, 60px);
     text-align: right;
-    font-size: 13px;
+    font-size: clamp(0.8125rem, 1vw, 0.9375rem);
     color: var(--text-muted);
 }
 
@@ -295,7 +298,7 @@ body {
 
 /* Scrollbar */
 ::-webkit-scrollbar {
-    width: 8px;
+    width: clamp(6px, 0.5vw, 8px);
 }
 
 ::-webkit-scrollbar-track {
@@ -313,23 +316,23 @@ body {
 
 /* Portfolio Feed Styles */
 .portfolio-container {
-    max-width: 1000px;
+    max-width: min(1000px, 80vw);
     margin: 0;
-    margin-left: 300px;
+    margin-left: clamp(200px, 20vw, 300px);
     margin-top: 100vh;
     padding: 0;
 }
 
 /* Projects Section */
 .projects-section {
-    max-width: 1200px;
+    max-width: min(1200px, 85vw);
     margin: 0;
-    margin-left: 350px;
-    padding: 60px 0;
+    margin-left: clamp(250px, 23vw, 350px);
+    padding: clamp(40px, 4vw, 60px) 0;
     display: flex;
     flex-direction: column;
-    gap: 40px;
-    margin-top: 450px;
+    gap: clamp(30px, 3vw, 40px);
+    margin-top: clamp(700px, 50vh, 700px);
 }
 
 @media (max-width: 900px) {
@@ -350,11 +353,11 @@ body {
 /* Project Card */
 .project-card {
     display: grid;
-    grid-template-columns: 300px 1fr;
-    gap: 120px;
+    grid-template-columns: clamp(250px, 20vw, 300px) 1fr;
+    gap: clamp(60px, 8vw, 120px);
     align-items: center;
-    padding-top: 50px;
-    padding-bottom: 50px;
+    padding-top: clamp(30px, 3.5vw, 50px);
+    padding-bottom: clamp(30px, 3.5vw, 50px);
     border-bottom: 1px solid #e5e5e5;
 }
 
@@ -370,12 +373,12 @@ body {
 .project-left {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: clamp(1rem, 1.5vw, 1.25rem);
 }
 
 .project-year {
     font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-    font-size: 14px;
+    font-size: clamp(0.875rem, 1vw, 1rem);
     color: var(--text-muted);
     font-weight: 400;
     letter-spacing: 0.02em;
@@ -383,7 +386,7 @@ body {
 
 .project-title {
     font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-    font-size: 30px;
+    font-size: clamp(1.5rem, 2.2vw, 1.875rem);
     font-weight: 500;
     color: var(--text);
     line-height: 1.2;
@@ -393,7 +396,7 @@ body {
 
 .project-description {
     font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-    font-size: 15px;
+    font-size: clamp(0.9375rem, 1.1vw, 1.0625rem);
     line-height: 1.6;
     color: var(--text-muted);
     font-weight: 400;
@@ -406,7 +409,7 @@ body {
     text-decoration: none;
     background: none;
     border: none;
-    font-size: 14px;
+    font-size: clamp(0.875rem, 1vw, 1rem);
     font-weight: 400;
     cursor: pointer;
     transition: color 0.2s ease;
@@ -426,7 +429,7 @@ body {
     width: 100%;
     aspect-ratio: 16/9;
     background: #000000;
-    border-radius: 12px;
+    border-radius: clamp(8px, 0.8vw, 12px);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -436,7 +439,7 @@ body {
 
 .project-image-placeholder span {
     color: #ffffff;
-    font-size: 14px;
+    font-size: clamp(0.875rem, 1vw, 1rem);
 }
 
 /* Responsive */
@@ -456,14 +459,14 @@ body {
 .projects-grid {
     display: flex;
     flex-direction: column;
-    gap: 120px;
+    gap: clamp(80px, 8vw, 120px);
 }
 
 /* Project Card */
 .project-card {
     display: grid;
     grid-template-columns: 1fr 0.7fr;
-    gap: 60px;
+    gap: clamp(40px, 4vw, 60px);
     align-items: center;
     transition: transform 0.3s ease;
 }
@@ -485,12 +488,12 @@ body {
 .project-content {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: clamp(0.875rem, 1.2vw, 1rem);
 }
 
 .project-year {
     font-family: var(--font);
-    font-size: 12px;
+    font-size: clamp(0.75rem, 0.9vw, 0.875rem);
     color: var(--text-muted);
     font-weight: 500;
     letter-spacing: 0.05em;
@@ -498,7 +501,7 @@ body {
 
 .project-title {
     font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-    font-size: 30px;
+    font-size: clamp(1.5rem, 2.2vw, 1.875rem);
     font-weight: 500;
     color: var(--text);
     letter-spacing: -0.01em;
@@ -508,7 +511,7 @@ body {
 
 .project-description {
     font-family: var(--font);
-    font-size: 13px;
+    font-size: clamp(0.8125rem, 1vw, 0.9375rem);
     line-height: 1.5;
     color: var(--text-muted);
     font-weight: 500;
@@ -517,7 +520,7 @@ body {
 
 .project-link {
     font-family: var(--font);
-    font-size: 13px;
+    font-size: clamp(0.8125rem, 1vw, 0.9375rem);
     color: var(--text);
     text-decoration: none;
     font-weight: 500;
@@ -543,7 +546,7 @@ body {
     position: relative;
     width: 100%;
     aspect-ratio: 16/9;
-    border-radius: 12px;
+    border-radius: clamp(8px, 0.8vw, 12px);
     background: #000000;
     border: none;
     overflow: hidden;
@@ -568,17 +571,17 @@ body {
 /* Responsive */
 @media (max-width: 900px) {
     .page {
-        padding: 30px 40px;
+        padding: 2vw 3vw;
     }
 
     .nav {
-        top: 30px;
-        right: 40px;
+        top: 2vw;
+        right: 3vw;
     }
 
     .content-grid {
         grid-template-columns: 1fr;
-        gap: 40px;
+        gap: clamp(30px, 4vw, 40px);
     }
 
     .sidebar {
@@ -586,17 +589,17 @@ body {
     }
 
     .initials {
-        margin-bottom: 40px;
+        margin-bottom: clamp(30px, 4vw, 40px);
     }
 
     .projects-grid {
-        gap: 80px;
+        gap: clamp(60px, 6vw, 80px);
     }
 
     .project-card,
     .project-card-reverse {
         grid-template-columns: 1fr;
-        gap: 32px;
+        gap: clamp(24px, 3vw, 32px);
         direction: ltr;
     }
 
@@ -612,27 +615,27 @@ body {
 
 @media (max-width: 600px) {
     .page {
-        padding: 24px;
+        padding: clamp(1.25rem, 3vw, 1.5rem);
     }
 
     .nav {
         position: static;
-        margin-bottom: 40px;
+        margin-bottom: clamp(30px, 5vw, 40px);
         justify-content: flex-start;
     }
 
     .initials {
-        font-size: 60px;
-        margin-bottom: 32px;
+        font-size: clamp(3.5rem, 12vw, 3.75rem);
+        margin-bottom: clamp(1.75rem, 4vw, 2rem);
     }
 
     .row {
         grid-template-columns: 1fr;
-        gap: 16px;
+        gap: 1rem;
     }
 
     .row-content-inline {
-        gap: 12px;
+        gap: 0.75rem;
     }
 
     .footer {
@@ -640,23 +643,23 @@ body {
     }
 
     .projects-grid {
-        gap: 64px;
+        gap: clamp(3.5rem, 8vw, 4rem);
     }
 
     .project-card {
-        gap: 24px;
+        gap: clamp(1.25rem, 3vw, 1.5rem);
     }
 
     .project-image {
-        border-radius: 12px;
+        border-radius: clamp(8px, 1.2vw, 12px);
     }
 }
 
 /* Cursor Follower */
 .cursor-follower {
     position: fixed;
-    width: 20px;
-    height: 20px;
+    width: clamp(16px, 1.2vw, 20px);
+    height: clamp(16px, 1.2vw, 20px);
     border-radius: 50%;
     background: rgba(26, 26, 26, 0.1);
     pointer-events: none;
@@ -670,8 +673,8 @@ body {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 6px;
-    height: 6px;
+    width: clamp(5px, 0.4vw, 6px);
+    height: clamp(5px, 0.4vw, 6px);
     background: rgba(26, 26, 26, 0.3);
     border-radius: 50%;
     transform: translate(-50%, -50%);
@@ -679,8 +682,8 @@ body {
 
 a:hover~.cursor-follower,
 button:hover~.cursor-follower {
-    width: 40px;
-    height: 40px;
+    width: clamp(32px, 2.5vw, 40px);
+    height: clamp(32px, 2.5vw, 40px);
     background: rgba(26, 26, 26, 0.05);
 }
 
