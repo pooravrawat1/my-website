@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Feed by Poorav Rawat - Projects, writings, and updates on AI, ML, and systems.">
-    <title>poorav rawat</title>
+    <meta name="description" content="Feed — Poorav Rawat's projects, writings, and notes on AI, ML, and systems.">
+    <title>feed — poorav rawat</title>
 
-    <!-- System fonts used for SF Pro effect -->
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="assets/favicon_io/favicon.ico">
@@ -24,48 +24,119 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body class="feed-page">
-
+<body>
     <div class="page">
-        <!-- Years - Right Side -->
-        <div class="years-container">
-            <div class="years-dash">—</div>
-            <div class="years-label">blog space</div>
-        </div>
 
         <!-- Navigation -->
-        <nav class="nav">
-            <a href="index.html" class="nav-link">info</a>
-            <a href="feed.html" class="nav-link active">feed</a>
+        <nav class="nav" id="nav">
+            <a href="index.html" class="nav-link" id="nav-info">info</a>
+            <a href="feed.html" class="nav-link active" id="nav-feed">feed</a>
         </nav>
 
         <!-- Main Content -->
         <main class="main">
-            <!-- Large Initials -->
-            <div class="initials">P – R</div>
 
-            <!-- Projects Section -->
-            <div class="projects-section">
-                <!-- Project Card -->
-                <article class="project-card">
-                    <div class="project-left">
-                        <span class="project-year">2025</span>
-                        <h2 class="project-title">formalization of intelligence</h2>
-                        <p class="project-description">why reinforcement learning feels like the “formalization of intelligence"</p>
-                        <a href="blog-formalization-of-intelligence.html" class="project-button">view →</a>
+            <!-- Hero Name (static on feed) -->
+            <h1 class="hero-name" style="margin-bottom: 8px;">poorav rawat</h1>
+            <div class="hero-sub" style="margin-bottom: 44px;">
+                <p>projects, writings, and notes</p>
+            </div>
+
+            <!-- Writing / Blog -->
+            <section class="writing-section" aria-label="Writing">
+                <p class="section-label">writing</p>
+
+                <div class="writing-list">
+                    <a href="blog-formalization-of-intelligence.html" class="writing-item">
+                        <span class="writing-index">[0]</span>
+                        <span class="writing-title">formalization of intelligence</span>
+                        <span class="writing-date">2025</span>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Projects -->
+            <section class="projects-section" aria-label="Projects">
+                <p class="section-label">projects</p>
+
+                <article class="project-entry">
+                    <div class="project-meta">
+                        <span class="project-entry-title">multimodal fusion model</span>
+                        <span class="project-entry-year">2024</span>
                     </div>
-                    <div class="project-right">
-                        <img src="assets/rl.png" alt="formalization of intelligence" class="project-image">
+                    <p class="project-entry-desc">
+                        research project on combining vision and language representations
+                        for improved downstream task performance.
+                    </p>
+                    <div class="project-tags">
+                        <span class="project-tag">pytorch</span>
+                        <span class="project-tag">transformers</span>
+                        <span class="project-tag">research</span>
                     </div>
                 </article>
 
-            </div>
+                <article class="project-entry">
+                    <div class="project-meta">
+                        <span class="project-entry-title">deep rl implementations</span>
+                        <span class="project-entry-year">2025</span>
+                    </div>
+                    <p class="project-entry-desc">
+                        from-scratch implementations of core deep reinforcement learning
+                        algorithms — dqn, ppo, a3c — for study and experimentation.
+                    </p>
+                    <div class="project-tags">
+                        <span class="project-tag">python</span>
+                        <span class="project-tag">reinforcement learning</span>
+                        <span class="project-tag">pytorch</span>
+                    </div>
+                </article>
+
+                <article class="project-entry">
+                    <div class="project-meta">
+                        <span class="project-entry-title">ci/cd pipeline infrastructure</span>
+                        <span class="project-entry-year">2025</span>
+                    </div>
+                    <p class="project-entry-desc">
+                        production-grade ci/cd systems for automated testing, deployment,
+                        and monitoring of ml model serving pipelines.
+                    </p>
+                    <div class="project-tags">
+                        <span class="project-tag">devops</span>
+                        <span class="project-tag">kubernetes</span>
+                        <span class="project-tag">github actions</span>
+                    </div>
+                </article>
+            </section>
+
         </main>
 
         <!-- Footer -->
         <footer class="footer">
             <span>poorav rawat © 2026</span>
+            <button class="footer-keybind" id="keybind-trigger" aria-label="Show keyboard shortcuts">press ? for
+                keybinds</button>
         </footer>
+    </div>
+
+    <!-- Keybinds Overlay -->
+    <div class="keybinds-overlay" id="keybinds-overlay" role="dialog" aria-modal="true" aria-label="Keyboard shortcuts">
+        <div class="keybinds-modal">
+            <p class="keybinds-modal-title">keybinds</p>
+            <div class="keybind-row"><span class="keybind-key">j / k</span><span class="keybind-desc">scroll down /
+                    up</span></div>
+            <div class="keybind-row"><span class="keybind-key">gg</span><span class="keybind-desc">go to top</span>
+            </div>
+            <div class="keybind-row"><span class="keybind-key">G</span><span class="keybind-desc">go to bottom</span>
+            </div>
+            <div class="keybind-row"><span class="keybind-key">1</span><span class="keybind-desc">go to info page</span>
+            </div>
+            <div class="keybind-row"><span class="keybind-key">2</span><span class="keybind-desc">go to feed page</span>
+            </div>
+            <div class="keybind-row"><span class="keybind-key">?</span><span class="keybind-desc">toggle keybinds</span>
+            </div>
+            <div class="keybind-row"><span class="keybind-key">esc</span><span class="keybind-desc">close overlay</span>
+            </div>
+        </div>
     </div>
 
     <script src="js/main.js"></script>
