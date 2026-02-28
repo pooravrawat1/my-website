@@ -4,14 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="formalization of intelligence - deep reinforcement learning research">
+    <meta name="description"
+        content="Formalization of Intelligence — why reinforcement learning feels like the formalization of intelligence. By Poorav Rawat.">
     <title>formalization of intelligence · poorav rawat</title>
 
-    <!-- System fonts used for SF Pro effect -->
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="assets/favicon_io/favicon.ico">
@@ -25,54 +26,68 @@
 </head>
 
 <body>
-
     <div class="page">
+
         <!-- Navigation -->
-        <nav class="nav">
-            <a href="info.html" class="nav-link">info</a>
-            <a href="index.html" class="nav-link active">feed</a>
+        <nav class="nav" id="nav">
+            <a href="index.html" class="nav-link" id="nav-info">info</a>
+            <a href="feed.html" class="nav-link active" id="nav-feed">feed</a>
         </nav>
 
         <!-- Main Content -->
         <main class="main">
-            <!-- Large Initials -->
-            <div class="initials">P – R</div>
 
-            <!-- Content Grid -->
-            <div class="content-grid">
-                <!-- Left Column - Blog Title -->
-                <aside class="sidebar">
-                    <div class="sidebar-block">
-                        <p class="sidebar-name">formalization of intelligence</p>
-                        <p class="sidebar-location">december, 2025</p>
-                    </div>
-                </aside>
-
-                <!-- Right Column - Blog Content -->
-                <div class="content">
-                    <!-- Introduction -->
-                    <section class="bio">
-                        <p>
-                            why reinforcement learning feels like the “formalization of intelligence"
-                        <p>
-                            i have been looking into reinforcement learning for the past few weeks by learning through <a href="https://www.youtube.com/playlist?list=PLqYmG7hTraZDVH599EItlEWsUOsJbAodm" target="_blank" rel="noopener noreferrer" class="row-item">google deepmind x ucl | deep learning lecture series</a>. i have already moved on to later lectures, but i wanted to pause and reflect on how the first lecture about reinforcement learning changed how i think about intelligence.
-                        <p>
-                            unlike supervised learning, reinforcement learning is not about extracting patterns from static data. it is the science of decision-making under uncertainty. some ideas from the foundations that stood out to me:
-                        <p>
-                            first, the reward hypothesis. 
-                            any goal can be framed as maximizing expected cumulative reward. if you can define the reward signal, you can define the problem.
-                        <p>
-                            second, the distinction between reward and value. 
-                            reward is immediate feedback. value is a long term prediction of future returns. this explains why optimal behaviour often have to sacrifice short term reward to maximize long term value.
-                        <p>  
-                            third, the structure of an agent. 
-                            policies, value functions, and models together form an agent's internal representation of the world. the distinction between learning through interaction and planning through internal reasoning is especially compelling.
-                        </p>
-                           
-
-                    </section>
-                </div>
+            <!-- Blog Header -->
+            <div class="blog-header">
+                <a href="feed.html" class="blog-back">← back</a>
+                <h1 class="blog-title">formalization of intelligence</h1>
+                <p class="blog-date">december 2025</p>
             </div>
+
+            <!-- Blog Body -->
+            <article class="blog-body">
+                <p>
+                    why reinforcement learning feels like the &ldquo;formalization of intelligence.&rdquo;
+                </p>
+                <p>
+                    i&rsquo;ve been working through the
+                    <a href="https://www.youtube.com/playlist?list=PLqYmG7hTraZDVH599EItlEWsUOsJbAodm" target="_blank"
+                        rel="noopener noreferrer">google deepmind × ucl deep learning lecture series</a>.
+                    i&rsquo;ve already moved on to later lectures, but i wanted to pause and reflect on
+                    how the first lecture on reinforcement learning changed how i think about intelligence itself.
+                </p>
+
+                <h2>the reward hypothesis</h2>
+                <p>
+                    unlike supervised learning, reinforcement learning is not about extracting patterns from
+                    static data. it is the science of decision-making under uncertainty.
+                </p>
+                <p>
+                    any goal can be framed as maximizing expected cumulative reward. if you can define
+                    the reward signal, you can define the problem. this is deceptively powerful.
+                </p>
+
+                <h2>reward vs. value</h2>
+                <p>
+                    reward is immediate feedback. value is a long-term prediction of future returns.
+                    this distinction explains why optimal behavior often requires sacrificing short-term
+                    reward to maximize long-term value — the kind of &ldquo;delayed gratification&rdquo; we associate
+                    with intelligent agents.
+                </p>
+
+                <h2>the structure of an agent</h2>
+                <p>
+                    policies, value functions, and models together form an agent&rsquo;s internal representation
+                    of the world. the distinction between <em>learning through interaction</em> and
+                    <em>planning through internal reasoning</em> is especially compelling to me.
+                </p>
+                <p>
+                    it feels less like programming a machine and more like designing the conditions
+                    under which intelligence can emerge. that&rsquo;s what makes it feel like a formalization
+                    of something deeper.
+                </p>
+            </article>
+
         </main>
 
         <!-- Footer -->
@@ -80,6 +95,7 @@
             <span>poorav rawat © 2026</span>
         </footer>
     </div>
+
 
     <script src="js/main.js"></script>
 </body>
