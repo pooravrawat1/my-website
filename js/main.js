@@ -1,50 +1,54 @@
-// ═══════════════════════════════════════════
-//  poorav rawat — main.js
-//  Terminal-style interactions
-// ═══════════════════════════════════════════
-
 document.addEventListener('DOMContentLoaded', () => {
 
-    // ─── ASCII Name Animation ───────────────
+    // ─── Typewriter with deliberate mistake ──
     const heroName = document.getElementById('hero-name');
     if (heroName) {
-        const prefix = 'Hello, I\'m ';
-        const nameText = 'Poorav Rawat';
-        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*-_+=<>';
-        let iteration = 0;
-        let interval = null;
-        let resolved = new Array(nameText.length).fill(false);
 
-        // Show prefix immediately
-        heroName.innerHTML = prefix + '<span class="ascii-cursor">_</span>';
+        const TYPE_MS = 100;   // ms per character typed
+        const DELETE_MS = 80;    // ms per character deleted
+        const PAUSE_MS = 650;   // ms pause when noticing the mistake
 
-        function scramble() {
-            const display = nameText
-                .split('')
-                .map((char, i) => {
-                    if (char === ' ') return ' ';
-                    if (resolved[i]) return char;
-                    if (i < Math.floor(iteration)) {
-                        resolved[i] = true;
-                        return char;
-                    }
-                    return chars[Math.floor(Math.random() * chars.length)];
-                })
-                .join('');
+        const PREFIX = "Hello, I'm ";
 
-            heroName.innerHTML = prefix + display + '<span class="ascii-cursor">_</span>';
+        // Render helper — prefix is always static, only `name` animates
+        const render = (name) => {
+            heroName.innerHTML =
+                PREFIX + name + '<span class="ascii-cursor">_</span>';
+        };
 
-            if (iteration >= nameText.length) {
-                clearInterval(interval);
-                heroName.innerHTML = prefix + nameText + '<span class="ascii-cursor">_</span>';
-            }
-            iteration += 0.4;
+        // Pre-build every frame: { name, delay }
+        const frames = [];
+
+        // ── Phase 1: type the wrong name "Poorva" ──
+        const wrong = 'Poorva';
+        for (let i = 1; i <= wrong.length; i++) {
+            frames.push({ name: wrong.slice(0, i), delay: TYPE_MS });
+        }
+        frames[frames.length - 1].delay = PAUSE_MS; // pause at mistake
+
+        // ── Phase 2: delete "va" (2 backspaces) ──
+        frames.push({ name: 'Poorv', delay: DELETE_MS });
+        frames.push({ name: 'Poor', delay: PAUSE_MS / 2 });
+
+        // ── Phase 3: type the correct ending "av Rawat" ──
+        const correct = 'Poorav Rawat';
+        const base = 'Poor'.length;
+        for (let i = base + 1; i <= correct.length; i++) {
+            frames.push({ name: correct.slice(0, i), delay: TYPE_MS });
         }
 
-        // Start after a longer delay (1 second)
-        setTimeout(() => {
-            interval = setInterval(scramble, 40);
-        }, 1000);
+        // Kick off the sequence
+        let frameIndex = 0;
+        render(''); // start with just the cursor
+
+        function runFrame() {
+            if (frameIndex >= frames.length) return;
+            const { name, delay } = frames[frameIndex++];
+            render(name);
+            setTimeout(runFrame, delay);
+        }
+
+        setTimeout(runFrame, 600); // initial pause before first keystroke
     }
 
     // ─── Smooth scroll for in-page links ───
