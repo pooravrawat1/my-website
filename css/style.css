@@ -245,6 +245,56 @@ a:hover {
     margin-left: 4px;
 }
 
+/* ─── Achievements Section ───────────────── */
+.achievements-section {
+    margin-bottom: 52px;
+}
+
+.achievement-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 6px 0;
+    text-decoration: none;
+    transition: color 0.15s ease;
+    color: var(--text);
+}
+
+.achievement-item:hover .achievement-title {
+    color: var(--accent);
+}
+
+.achievement-item--static:hover .achievement-title {
+    color: var(--text);
+    cursor: default;
+}
+
+.achievement-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+}
+
+.achievement-title {
+    font-size: 11.5px;
+    color: var(--text);
+    transition: color 0.15s ease;
+    font-weight: 400;
+}
+
+.achievement-date {
+    font-size: 11.5px;
+    color: var(--text-muted);
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.achievement-desc {
+    font-size: 11.5px;
+    color: var(--text-muted);
+}
+
 /* ─── Writing / Blog Section ─────────────── */
 .writing-section {
     margin-bottom: 52px;
