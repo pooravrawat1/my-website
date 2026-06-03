@@ -203,13 +203,37 @@ a:hover {
     color: var(--text);
 }
 
-.exp-item:hover .exp-title {
+.exp-role-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.exp-row.clickable:hover .exp-role {
     color: var(--accent);
 }
 
-.exp-item:hover .exp-arrow {
-    transform: translateX(4px);
-    color: var(--accent);
+.clickable {
+    cursor: pointer;
+}
+
+.exp-description {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    font-size: 11px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--text-muted);
+    padding-left: 24px; /* Increased padding to align with bullet content */
+    margin-top: 0;
+    transition: max-height 0.3s ease, opacity 0.3s ease, margin-top 0.3s ease;
+}
+
+.exp-role-group.expanded .exp-description {
+    max-height: 200px; /* Adjust as needed */
+    opacity: 1;
+    margin-top: 4px;
+    margin-bottom: 8px;
 }
 
 .exp-row {
@@ -264,16 +288,18 @@ a:hover {
     color: var(--accent);
 }
 
-.achievement-item--static:hover .achievement-title {
-    color: var(--text);
-    cursor: default;
+.achievement-row {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.3s ease, opacity 0.3s ease, margin-top 0.3s ease;
 }
 
-.achievement-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 12px;
+.achievement-item.expanded .achievement-row {
+    max-height: 100px;
+    opacity: 1;
+    margin-top: 4px;
+    margin-bottom: 8px;
 }
 
 .achievement-title {
@@ -291,7 +317,9 @@ a:hover {
 }
 
 .achievement-desc {
-    font-size: 11.5px;
+    font-size: 11px;
+    font-weight: 300;
+    font-style: italic;
     color: var(--text-muted);
 }
 
