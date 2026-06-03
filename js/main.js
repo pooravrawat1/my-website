@@ -64,6 +64,26 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // ─── Experience Toggle ───────────────────
+    document.querySelectorAll('.exp-row.clickable').forEach(row => {
+        row.addEventListener('click', () => {
+            const roleGroup = row.closest('.exp-role-group');
+            if (roleGroup) {
+                roleGroup.classList.toggle('expanded');
+            }
+        });
+    });
+
+    // ─── Achievement Toggle ──────────────────
+    document.querySelectorAll('.achievement-title.clickable').forEach(title => {
+        title.addEventListener('click', () => {
+            const achievementItem = title.closest('.achievement-item');
+            if (achievementItem) {
+                achievementItem.classList.toggle('expanded');
+            }
+        });
+    });
+
 });
 
 // ─── Console Easter Egg ─────────────────────
