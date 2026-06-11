@@ -1,5 +1,11 @@
 {
   "cleanUrls": true,
+  "rewrites": [
+    { "source": "/", "destination": "/pages/index.html" },
+    { "source": "/feed", "destination": "/pages/feed.html" },
+    { "source": "/blogs/(.*)", "destination": "/pages/blogs/$1.html" },
+    { "source": "/blog-formalization-of-intelligence", "destination": "/pages/blogs/blog-formalization-of-intelligence.html" }
+  ],
   "redirects": [
     { "source": "/info", "destination": "/", "permanent": true }
   ]
