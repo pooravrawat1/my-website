@@ -1,10 +1,10 @@
 {
   "cleanUrls": true,
   "rewrites": [
-    { "source": "/", "destination": "/pages/index.html" },
-    { "source": "/feed", "destination": "/pages/feed.html" },
-    { "source": "/blogs/(.*)", "destination": "/pages/blogs/$1.html" },
-    { "source": "/blog-formalization-of-intelligence", "destination": "/pages/blogs/blog-formalization-of-intelligence.html" }
+    { "source": "/", "destination": "/content/index.html" },
+    { "source": "/feed", "destination": "/content/feed.html" },
+    { "source": "/blogs/(.*)", "destination": "/content/blogs/$1.html" },
+    { "source": "/blog-formalization-of-intelligence", "destination": "/content/blogs/blog-formalization-of-intelligence.html" }
   ],
   "redirects": [
     { "source": "/info", "destination": "/", "permanent": true }
