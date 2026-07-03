@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="The growing gap between senior and junior developers in the AI age based on my SRE internship experience">
+    <title>The growing gap between senior and junior developers in the AI age · poorav rawat</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../assets/favicon_io/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon_io/favicon-16x16.png">
+    <link rel="apple-touch-icon" href="../assets/favicon_io/apple-touch-icon.png">
+    <link rel="manifest" href="../assets/favicon_io/site.webmanifest">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <div class="page">
+
+        <!-- Navigation -->
+        <nav class="nav" id="nav">
+            <a href="../index.html" class="nav-link" id="nav-info">info</a>
+            <a href="../feed.html" class="nav-link active" id="nav-feed">feed</a>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main">
+
+            <!-- Blog Header -->
+            <div class="blog-header">
+                <a href="../feed.html" class="blog-back">← back</a>
+                <h1 class="blog-title">Formalization of intelligence</h1>
+                <p class="blog-date">December 2025</p>
+            </div>
+
+            <!-- Blog Body -->
+            <article class="blog-body">
+                <p>
+                    Why reinforcement learning feels like the &ldquo;formalization of intelligence.&rdquo;
+                </p>
+                <p>
+                    I&rsquo;ve been working through the
+                    <a href="https://www.youtube.com/playlist?list=PLqYmG7hTraZDVH599EItlEWsUOsJbAodm" target="_blank"
+                        rel="noopener noreferrer">google deepmind × ucl deep learning lecture series</a>.
+                    I&rsquo;ve already moved on to later lectures, but I wanted to pause and reflect on
+                    how the first lecture on reinforcement learning changed how I think about intelligence itself.
+                </p>
+
+                <h2>The reward hypothesis</h2>
+                <p>
+                    Unlike supervised learning, reinforcement learning is not about extracting patterns from
+                    static data. It is the science of decision-making under uncertainty.
+                </p>
+                <p>
+                    Any goal can be framed as maximizing expected cumulative reward. If you can define
+                    the reward signal, you can define the problem. This is deceptively powerful.
+                </p>
+
+                <h2>Reward vs. Value</h2>
+                <p>
+                    Reward is immediate feedback. Value is a long-term prediction of future returns.
+                    This distinction explains why optimal behavior often requires sacrificing short-term
+                    reward to maximize long-term value — the kind of &ldquo;delayed gratification&rdquo; we associate
+                    with intelligent agents.
+                </p>
+
+                <h2>The structure of an agent</h2>
+                <p>
+                    Policies, value functions, and models together form an agent&rsquo;s internal representation
+                    of the world. The distinction between <em>learning through interaction</em> and
+                    <em>planning through internal reasoning</em> is especially compelling to me.
+                </p>
+                <p>
+                    It feels less like programming a machine and more like designing the conditions
+                    under which intelligence can emerge. That&rsquo;s what makes it feel like a formalization
+                    of something deeper.
+                </p>
+            </article>
+
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <span>poorav rawat © 2026</span>
+        </footer>
+    </div>
+
+
+    <script src="../js/main.js"></script>
+</body>
+
+</html>
