@@ -238,6 +238,13 @@ a:hover {
     gap: 12px;
 }
 
+.exp-row-right {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    flex-shrink: 0;
+}
+
 .exp-title {
     font-size: 11.5px;
     color: var(--text);
@@ -262,6 +269,34 @@ a:hover {
     color: var(--text-dim);
     transition: transform 0.15s ease, color 0.15s ease;
     margin-left: 4px;
+}
+
+/* ─── Expand Chevron (shared by exp + achievements) ── */
+.expand-chevron {
+    font-size: 10px;
+    color: var(--text-dim);
+    display: inline-block;
+    transition: transform 0.25s ease, color 0.15s ease;
+    line-height: 1;
+    vertical-align: middle;
+}
+
+.exp-role-group.expanded .expand-chevron,
+.achievement-item.expanded .expand-chevron {
+    transform: rotate(180deg);
+    color: var(--accent);
+}
+
+.exp-row.clickable:hover .expand-chevron,
+.achievement-title.clickable:hover .expand-chevron {
+    color: var(--accent);
+}
+
+/* keep achievement-title inline with chevron */
+.achievement-title.clickable {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
 }
 
 /* ─── Achievements Section ───────────────── */
