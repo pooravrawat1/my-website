@@ -26,7 +26,6 @@ html {
 
 body {
     margin: 0;
-    background: var(--paper);
     color: var(--ink);
     font-family: var(--mono);
     font-size: 15px;
@@ -53,6 +52,16 @@ b, strong, em, th, h1, h2, h3, h4, h5, h6 {
 h1, h2, h3, p, figure {
     font: inherit;
     margin: 0;
+}
+
+h1, h2 {
+    display: inline;
+    text-align: left;
+    padding: 0 .5ch;
+    background: var(--ink);
+    color: var(--paper);
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
 }
 
 ::selection {
@@ -168,8 +177,12 @@ h1, h2, h3, p, figure {
 }
 
 .section-heading {
-    justify-content: flex-start;
+    display: block;
     text-align: left;
+}
+
+.heading-row {
+    display: block;
 }
 
 .section-heading h2,
@@ -295,20 +308,6 @@ h1, h2, h3, p, figure {
 @keyframes print-head {
     from { top: -2px; opacity: 1; }
     to { top: calc(100% - 2px); opacity: 1; }
-}
-
-/* ─── Exhibit panels on black ────────────── */
-.screen {
-    color-scheme: dark;
-    --ink: #f2f2f2;
-    --paper: #0a0a0a;
-    --gutter: #747474;
-    --faint: #3d3d3d;
-    --muted: #a6a6a6;
-    --accent: #00a83e;
-    background: var(--paper);
-    color: var(--ink);
-    padding: calc(var(--lh) * 1em) 0;
 }
 
 /* ─── Feed ───────────────────────────────── */
