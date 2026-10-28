@@ -183,7 +183,7 @@ h1, h2, h3, p, figure {
     flex: 1 1 auto;
     flex-wrap: wrap;
     column-gap: 1ch;
-    justify-content: flex-end;
+    justify-content: flex-start;
 }
 
 .nav a {
