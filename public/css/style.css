@@ -72,11 +72,15 @@ h1 {
 /* ─── Sheet & numbered lines ─────────────── */
 .doc {
     counter-reset: ln;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
     padding: 48px 0 0;
 }
 
 .sheet {
     max-width: 88ch;
+    width: 100%;
     margin: 0 auto;
     padding: 0 24px 0 64px;
 }
@@ -320,6 +324,19 @@ a.row-link:focus-visible {
 }
 
 /* ─── Footer ─────────────────────────────── */
+.site-footer {
+    color-scheme: dark;
+    --ink: #f2f2f2;
+    --paper: #0a0a0a;
+    --gutter: #747474;
+    --faint: #3d3d3d;
+    --muted: #a6a6a6;
+    --accent: #00a83e;
+    flex: 1 0 auto;
+    background: var(--paper);
+    color: var(--ink);
+}
+
 .foot {
     color: var(--muted);
 }
