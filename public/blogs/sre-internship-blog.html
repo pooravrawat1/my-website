@@ -21,13 +21,14 @@
 
     <!-- Stylesheet -->
     <link rel="stylesheet" href="../css/style.css">
+    <script>document.documentElement.dataset.theme = localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');</script>
 </head>
 
 <body>
 <main class="doc">
 <div class="sheet">
 
-  <div class="l caps"><span>Poorav Rawat</span><nav class="nav" aria-label="Site"><a class="chip" href="../index.html">info</a><a class="chip on" href="../feed.html" aria-current="page">feed</a><a class="chip" href="../assets/Poorav_Rawat_Resume.pdf" target="_blank" rel="noopener noreferrer">resume</a></nav></div>
+  <div class="l caps"><span>Poorav Rawat</span><nav class="nav" aria-label="Site"><a class="chip" href="../index.html">info</a><a class="chip on" href="../feed.html" aria-current="page">feed</a><a class="chip" href="../assets/Poorav_Rawat_Resume.pdf" target="_blank" rel="noopener noreferrer">resume</a><button class="chip" id="theme-toggle" type="button" aria-pressed="false">dark</button></nav></div>
   <div class="l caps"><span>Department of Computer Science</span></div>
   <div class="l caps"><span>Georgia State University, Atlanta, GA</span></div>
   <div class="l"></div>
@@ -44,6 +45,7 @@
   </article>
 
   <div class="l"></div>
+  <div class="l command-hint muted"><span>press / to type a command · try "help"</span></div>
   <div class="l divider" aria-hidden="true"><span>================================================================================================================================================================================================================================================</span></div>
   <footer class="l foot"><span>Poorav Rawat &copy; 2026</span><span>End of transcript</span></footer>
   <div class="l"></div>

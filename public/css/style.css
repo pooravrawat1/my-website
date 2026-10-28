@@ -1,13 +1,27 @@
-/* A printed transcript: one monospace face at one weight, every line numbered,
-   system text in capitals, inverted chips for titles and buttons, exhibits on black. */
+/* A printed transcript: one monospace face at one weight, every line numbered. */
 :root {
     --ink: #111;
     --paper: #fff;
     --gutter: #8a8a8a;
     --faint: #c9c9c9;
     --muted: #595959;
+    --accent: #ff4f00;
     --mono: "Source Code Pro", ui-monospace, Menlo, monospace;
     --lh: 1.8;
+}
+
+html {
+    color-scheme: light;
+}
+
+html[data-theme="dark"] {
+    color-scheme: dark;
+    --ink: #f2f2f2;
+    --paper: #0a0a0a;
+    --gutter: #747474;
+    --faint: #3d3d3d;
+    --muted: #a6a6a6;
+    --accent: #ff4f00;
 }
 
 *,
@@ -27,10 +41,18 @@ body {
     font-family: var(--mono);
     font-size: 15px;
     line-height: var(--lh);
+    text-transform: lowercase;
 }
 
 a {
     color: inherit;
+}
+
+a:hover,
+a:focus-visible {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
 }
 
 b, strong, em, th, h1, h2, h3, h4, h5, h6 {
@@ -80,12 +102,40 @@ h1, h2, h3, p, figure {
     top: .55em;
 }
 
+.l[data-ln]::before {
+    cursor: pointer;
+}
+
+.l:hover::before {
+    color: var(--accent);
+}
+
+.l.hl {
+    isolation: isolate;
+}
+
+.l.hl::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: 0 0 0 -5ch;
+    background: color-mix(in srgb, var(--accent) 12%, transparent);
+}
+
+.l.hl::before {
+    color: var(--accent);
+}
+
 /* Set by main.js: one number per rendered line, so a wrapped row reads 6, 7. */
 .l[data-ln]::before {
     content: attr(data-ln);
     white-space: pre;
     line-height: var(--ln-lh);
     top: 0;
+}
+
+.l[data-ln][data-first]::before {
+    cursor: pointer;
 }
 
 .l[hidden] {
@@ -109,12 +159,6 @@ h1, h2, h3, p, figure {
     padding-left: 4ch;
 }
 
-.notice,
-.caps,
-.l > h2 {
-    text-transform: uppercase;
-}
-
 .muted {
     color: var(--muted);
 }
@@ -131,7 +175,6 @@ h1, h2, h3, p, figure {
     display: grid;
     grid-template-columns: 1fr 16ch;
     column-gap: 2ch;
-    text-transform: uppercase;
 }
 
 .tx > :last-child {
@@ -143,7 +186,6 @@ h1, h2, h3, p, figure {
     display: grid;
     grid-template-columns: 6ch 1fr 8ch;
     column-gap: 0;
-    text-transform: uppercase;
 }
 
 /* ─── Chips: buttons, nav and titles ─────── */
@@ -166,6 +208,12 @@ button.chip:focus-visible {
     outline: none;
 }
 
+a.chip:hover,
+a.chip:focus-visible {
+    background: transparent;
+    color: var(--accent);
+}
+
 .chip.on,
 .hero-title,
 .blog-title,
@@ -176,10 +224,10 @@ button.chip:focus-visible {
 
 .cta:hover,
 .cta:focus-visible {
-    background: var(--ink);
-    color: var(--paper);
-    outline: 2px solid var(--ink);
-    outline-offset: 2px;
+    background: transparent;
+    color: var(--accent);
+    outline: none;
+    text-decoration: underline;
 }
 
 .cta .arr {
@@ -209,7 +257,6 @@ button.chip:focus-visible {
     display: flex;
     flex-wrap: wrap;
     column-gap: 1ch;
-    text-transform: uppercase;
 }
 
 .chips {
@@ -218,12 +265,9 @@ button.chip:focus-visible {
     column-gap: 2ch;
 }
 
-.hero-title {
-    text-transform: uppercase;
-}
-
 .cursor {
     animation: blink 1s step-end infinite;
+    color: var(--accent);
 }
 
 @keyframes blink {
@@ -311,16 +355,21 @@ button.chip:focus-visible {
     --gutter: #747474;
     --faint: #3d3d3d;
     --muted: #a6a6a6;
+    --accent: #ff4f00;
     background: var(--paper);
     color: var(--ink);
     padding: calc(var(--lh) * 1em) 0;
+}
+
+html[data-theme="dark"] .screen {
+    --paper: #161616;
+    border-block: 1px solid var(--faint);
 }
 
 .meter {
     display: grid;
     grid-template-columns: 22ch 1fr 20ch;
     column-gap: 2ch;
-    text-transform: uppercase;
 }
 
 .meter .bar {
@@ -330,7 +379,7 @@ button.chip:focus-visible {
 }
 
 .meter .bar b {
-    color: var(--ink);
+    color: var(--accent);
 }
 
 .meter > :last-child {
@@ -342,39 +391,107 @@ a.row-link {
     text-decoration: none;
 }
 
-a.row-link:hover .t,
-a.row-link:focus-visible .t {
-    background: var(--ink);
-    color: var(--paper);
-}
-
 a.row-link:focus-visible {
     outline: none;
 }
 
 /* ─── Blog posts ─────────────────────────── */
-.blog-title {
-    text-transform: uppercase;
-}
-
 .prose a {
     text-underline-offset: 3px;
 }
 
-.prose a:hover {
-    background: var(--ink);
-    color: var(--paper);
-    text-decoration: none;
-}
-
-.prose h2 {
-    text-transform: uppercase;
-}
-
 /* ─── Footer ─────────────────────────────── */
 .foot {
-    text-transform: uppercase;
     color: var(--muted);
+}
+
+.command-hint {
+    color: var(--muted);
+}
+
+.command-bar {
+    position: fixed;
+    z-index: 1000;
+    inset: auto 0 0;
+    padding: .5em max(24px, calc((100vw - 88ch) / 2));
+    border-top: 1px solid var(--faint);
+    background: var(--paper);
+    color: var(--ink);
+    box-shadow: 0 -3px 0 color-mix(in srgb, var(--ink) 8%, transparent);
+}
+
+.command-output {
+    max-height: calc(var(--lh) * 8em);
+    overflow: auto;
+    white-space: pre-wrap;
+    color: var(--muted);
+}
+
+.command-output:empty {
+    display: none;
+}
+
+.command-form {
+    display: flex;
+    align-items: baseline;
+    gap: 1ch;
+}
+
+.command-prompt {
+    color: var(--accent);
+}
+
+.command-input {
+    flex: 1;
+    min-width: 0;
+    border: 0;
+    outline: 0;
+    padding: 0;
+    background: transparent;
+    color: var(--ink);
+    font: inherit;
+    text-transform: lowercase;
+}
+
+.command-input::selection {
+    background: var(--ink);
+    color: var(--paper);
+}
+
+.command-input:focus {
+    caret-color: var(--accent);
+}
+
+.grid-row {
+    display: block;
+    white-space: pre;
+    text-transform: none;
+    font-size: .8em;
+    line-height: var(--lh);
+}
+
+.grid-agent,
+.grid-goal {
+    color: var(--accent);
+}
+
+.grid-value {
+    color: color-mix(in srgb, var(--ink) var(--shade), var(--paper));
+}
+
+.agent-stats .l {
+    display: grid;
+    grid-template-columns: 22ch 1fr;
+    column-gap: 2ch;
+}
+
+.agent-controls {
+    display: flex;
+    gap: 1ch;
+}
+
+.agent-path {
+    color: var(--accent);
 }
 
 .doc > .tail {
@@ -413,6 +530,18 @@ a.row-link:focus-visible {
 
     .kv3 {
         grid-template-columns: 5ch 1fr 5ch;
+    }
+
+    .command-bar {
+        padding-inline: 16px;
+    }
+
+    .grid-row {
+        font-size: .7em;
+    }
+
+    .agent-stats .l {
+        grid-template-columns: 18ch 1fr;
     }
 }
 
