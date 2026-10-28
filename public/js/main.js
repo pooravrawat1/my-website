@@ -297,6 +297,7 @@ document.querySelectorAll('.toggle[aria-controls]').forEach(btn => {
 
     function reset() {
         cancelAnimationFrame(frame);
+        frame = 0;
         q = Array.from({ length: WIDTH * HEIGHT }, () => [0, 0, 0, 0]);
         visited = new Uint8Array(WIDTH * HEIGHT);
         episode = 0;
@@ -448,7 +449,10 @@ document.querySelectorAll('.toggle[aria-controls]').forEach(btn => {
         paused = !paused;
         pauseButton.textContent = paused ? 'resume' : 'pause';
         pauseButton.setAttribute('aria-pressed', String(paused));
-        if (paused) cancelAnimationFrame(frame);
+        if (paused) {
+            cancelAnimationFrame(frame);
+            frame = 0;
+        }
         else if (visible) {
             if (reduce) trainSynchronously();
             else requestFrame();
@@ -483,7 +487,10 @@ document.querySelectorAll('.toggle[aria-controls]').forEach(btn => {
     input.spellcheck = false;
     input.setAttribute('aria-label', 'command');
     form.append(prompt, input);
-    bar.append(output, form);
+    const inner = document.createElement('div');
+    inner.className = 'command-inner';
+    inner.append(output, form);
+    bar.append(inner);
     document.body.append(bar);
 
     const commands = ['help', 'info', 'home', 'feed', 'resume', 'ls', 'open', 'cd', 'whoami', 'theme', 'dark', 'light', 'goto', 'github', 'linkedin', 'codeforces', 'email', 'train', 'reset', 'clear'];

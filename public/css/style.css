@@ -199,6 +199,17 @@ h1, h2, h3, p, figure {
     margin: -1px 0;
 }
 
+button.chip {
+    -webkit-appearance: none;
+    appearance: none;
+    font: inherit;
+    line-height: inherit;
+    color: inherit;
+    background: transparent;
+    text-transform: inherit;
+    cursor: pointer;
+}
+
 a.chip:hover,
 a.chip:focus-visible,
 button.chip:hover,
@@ -413,11 +424,17 @@ a.row-link:focus-visible {
     position: fixed;
     z-index: 1000;
     inset: auto 0 0;
-    padding: .5em max(24px, calc((100vw - 88ch) / 2));
+    padding: .5em 0;
     border-top: 1px solid var(--faint);
     background: var(--paper);
     color: var(--ink);
     box-shadow: 0 -3px 0 color-mix(in srgb, var(--ink) 8%, transparent);
+}
+
+.command-inner {
+    max-width: 88ch;
+    margin: 0 auto;
+    padding: 0 24px 0 64px;
 }
 
 .command-output {
@@ -451,15 +468,12 @@ a.row-link:focus-visible {
     color: var(--ink);
     font: inherit;
     text-transform: lowercase;
+    caret-color: var(--accent);
 }
 
 .command-input::selection {
     background: var(--ink);
     color: var(--paper);
-}
-
-.command-input:focus {
-    caret-color: var(--accent);
 }
 
 .grid-row {
@@ -533,7 +547,11 @@ a.row-link:focus-visible {
     }
 
     .command-bar {
-        padding-inline: 16px;
+        padding-inline: 0;
+    }
+
+    .command-inner {
+        padding: 0 16px 0 44px;
     }
 
     .grid-row {
