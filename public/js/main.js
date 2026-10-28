@@ -132,21 +132,20 @@ document.querySelectorAll('.toggle[aria-controls]').forEach(btn => {
 
 // ─── Dot-matrix portrait ───────────────────
 // The photo is error-diffused onto a dot grid in the ink colour.
-// data-crop="x y w h" (fractions of the photo) picks the framed region.
+// data-focus and data-zoom frame an EXIF-oriented photo without distortion.
 (() => {
     const canvas = document.getElementById('portrait');
     if (!canvas) return;
     const img = new Image();
     img.src = canvas.dataset.src;
-    const crop = (canvas.dataset.crop || '0 0 1 1').split(' ').map(Number);
+    const focus = (canvas.dataset.focus || '0.25 0.52').split(/\s+/).map(Number);
+    const zoom = Math.max(1, Number(canvas.dataset.zoom) || 1);
     const CELL = 2.5;
 
     function draw() {
         const w = canvas.clientWidth;
-        const lineHeight = parseFloat(getComputedStyle(canvas.closest('.l')).lineHeight) || 27;
-        const h = Math.max(lineHeight, Math.round((w * 4 / 3) / lineHeight) * lineHeight);
+        const h = canvas.getBoundingClientRect().height;
         if (!w || !h || !img.naturalWidth) return;
-        if (Math.abs(canvas.clientHeight - h) > 0.5) canvas.style.height = h + 'px';
         const dpr = window.devicePixelRatio || 1;
         canvas.width = Math.round(w * dpr);
         canvas.height = Math.round(h * dpr);
@@ -155,12 +154,18 @@ document.querySelectorAll('.toggle[aria-controls]').forEach(btn => {
         const off = document.createElement('canvas');
         off.width = cols; off.height = rows;
         const o = off.getContext('2d', { willReadFrequently: true });
-        const sx = crop[0] * img.naturalWidth, sy = crop[1] * img.naturalHeight;
-        const sw = crop[2] * img.naturalWidth, sh = crop[3] * img.naturalHeight;
-        const scale = Math.max(cols / sw, rows / sh);
-        const dw = sw * scale, dh = sh * scale;
+        const aspect = cols / rows;
+        let sw = img.naturalWidth, sh = img.naturalHeight;
+        if (sw / sh > aspect) sw = sh * aspect;
+        else sh = sw / aspect;
+        sw /= zoom;
+        sh /= zoom;
+        const fx = Math.max(0, Math.min(1, focus[0] || 0)) * img.naturalWidth;
+        const fy = Math.max(0, Math.min(1, focus[1] || 0)) * img.naturalHeight;
+        const sx = Math.max(0, Math.min(img.naturalWidth - sw, fx - sw / 2));
+        const sy = Math.max(0, Math.min(img.naturalHeight - sh, fy - sh / 2));
         o.filter = 'grayscale(1) brightness(1.15) contrast(1.35)';
-        o.drawImage(img, sx, sy, sw, sh, (cols - dw) / 2, (rows - dh) / 2, dw, dh);
+        o.drawImage(img, sx, sy, sw, sh, 0, 0, cols, rows);
         const px = o.getImageData(0, 0, cols, rows).data;
 
         const lum = new Float32Array(cols * rows);
