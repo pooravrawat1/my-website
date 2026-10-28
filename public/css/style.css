@@ -27,7 +27,6 @@ body {
     font-family: var(--mono);
     font-size: 15px;
     line-height: var(--lh);
-    -webkit-font-smoothing: antialiased;
 }
 
 a {
