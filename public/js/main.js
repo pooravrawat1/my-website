@@ -142,8 +142,11 @@ document.querySelectorAll('.toggle[aria-controls]').forEach(btn => {
     const CELL = 2.5;
 
     function draw() {
-        const w = canvas.clientWidth, h = canvas.clientHeight;
+        const w = canvas.clientWidth;
+        const lineHeight = parseFloat(getComputedStyle(canvas.closest('.l')).lineHeight) || 27;
+        const h = Math.max(lineHeight, Math.round((w * 4 / 3) / lineHeight) * lineHeight);
         if (!w || !h || !img.naturalWidth) return;
+        if (Math.abs(canvas.clientHeight - h) > 0.5) canvas.style.height = h + 'px';
         const dpr = window.devicePixelRatio || 1;
         canvas.width = Math.round(w * dpr);
         canvas.height = Math.round(h * dpr);
@@ -193,258 +196,6 @@ document.querySelectorAll('.toggle[aria-controls]').forEach(btn => {
     new ResizeObserver(draw).observe(canvas);
 })();
 
-// ─── Exhibit meters ────────────────────────
-// Each bar fills in steps the first time it scrolls into view.
-(() => {
-    const bars = [...document.querySelectorAll('.bar[data-fill]')];
-    if (!bars.length) return;
-    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    const cellsFor = (bar) => {
-        const probe = document.createElement('span');
-        probe.textContent = '0000000000';
-        probe.style.visibility = 'hidden';
-        probe.style.position = 'absolute';
-        bar.appendChild(probe);
-        const ch = probe.getBoundingClientRect().width / 10 || 9;
-        probe.remove();
-        return Math.max(4, Math.floor(bar.clientWidth / ch) - 2);
-    };
-
-    const paint = (bar, filled, cells) => {
-        bar.innerHTML = '[<b>' + '#'.repeat(filled) + '</b>' + '.'.repeat(cells - filled) + ']';
-    };
-
-    const run = (bar) => {
-        const cells = cellsFor(bar);
-        const goal = Math.round(cells * parseFloat(bar.dataset.fill));
-        if (reduce) { paint(bar, goal, cells); return; }
-        let i = 0;
-        const tick = () => {
-            paint(bar, i, cells);
-            if (i++ < goal) setTimeout(tick, 28);
-        };
-        tick();
-    };
-
-    bars.forEach(bar => paint(bar, 0, cellsFor(bar)));
-    const io = new IntersectionObserver(entries => {
-        entries.forEach(e => {
-            if (e.isIntersecting) { io.unobserve(e.target); run(e.target); }
-        });
-    }, { threshold: 0.6 });
-    bars.forEach(bar => io.observe(bar));
-})();
-
-// ─── Gridworld learner ─────────────────────
-(() => {
-    const exhibit = document.getElementById('agent-exhibit');
-    if (!exhibit) return;
-    const rows = [...exhibit.querySelectorAll('.grid-row')];
-    const statEpisode = exhibit.querySelector('[data-stat="episode"]');
-    const statSteps = exhibit.querySelector('[data-stat="steps"]');
-    const statEpsilon = exhibit.querySelector('[data-stat="epsilon"]');
-    const statBest = exhibit.querySelector('[data-stat="best"]');
-    const status = exhibit.querySelector('[data-agent-status]');
-    const pauseButton = exhibit.querySelector('[data-agent-pause]');
-    const WALLS = [
-        '.........#........',
-        '....#........#....',
-        '....#........#....',
-        '....#........#....',
-        '....#........#....',
-        '....#........#....',
-        '....#........#....',
-    ];
-    const WIDTH = 18, HEIGHT = 7, ACTIONS = [[0, -1], [1, 0], [0, 1], [-1, 0]];
-    const ALPHA = 0.5, GAMMA = 0.95, EPSILON_FLOOR = 0.05;
-    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const io = new IntersectionObserver(entries => {
-        for (const entry of entries) {
-            visible = entry.isIntersecting;
-            if (visible && !converged && !paused) {
-                if (reduce) trainSynchronously();
-                else requestFrame();
-            }
-        }
-    }, { threshold: 0.1 });
-    let q, visited, episode, steps, lastSteps, epsilon, best, lastLengths;
-    let x, y, episodeDone, visible = false, paused = false, converged = false, frame = 0;
-
-    const index = (cx, cy) => cy * WIDTH + cx;
-    const wall = (cx, cy) => WALLS[cy][cx] === '#';
-    const legal = (cx, cy) => cx >= 0 && cx < WIDTH && cy >= 0 && cy < HEIGHT && !wall(cx, cy);
-
-    function reset() {
-        cancelAnimationFrame(frame);
-        frame = 0;
-        q = Array.from({ length: WIDTH * HEIGHT }, () => [0, 0, 0, 0]);
-        visited = new Uint8Array(WIDTH * HEIGHT);
-        episode = 0;
-        steps = 0;
-        lastSteps = 0;
-        epsilon = 1;
-        best = Infinity;
-        lastLengths = [];
-        x = 0;
-        y = HEIGHT - 1;
-        episodeDone = false;
-        converged = false;
-        paused = false;
-        pauseButton.textContent = 'pause';
-        pauseButton.setAttribute('aria-pressed', 'false');
-        if (visible) {
-            if (reduce) trainSynchronously();
-            else requestFrame();
-        } else render();
-    }
-
-    function chooseAction(state) {
-        if (Math.random() < epsilon) return Math.floor(Math.random() * ACTIONS.length);
-        const max = Math.max(...q[state]);
-        const ties = q[state].map((value, i) => value === max ? i : -1).filter(i => i >= 0);
-        return ties[Math.floor(Math.random() * ties.length)];
-    }
-
-    function trainStep() {
-        if (episodeDone) {
-            x = 0;
-            y = HEIGHT - 1;
-            steps = 0;
-            episodeDone = false;
-        }
-        const state = index(x, y);
-        visited[state] = 1;
-        const action = chooseAction(state);
-        const [dx, dy] = ACTIONS[action];
-        const nx = x + dx, ny = y + dy;
-        const moved = legal(nx, ny);
-        const tx = moved ? nx : x, ty = moved ? ny : y;
-        const terminal = tx === WIDTH - 1 && ty === 0;
-        const next = index(tx, ty);
-        visited[next] = 1;
-        const reward = terminal ? 10 : -1;
-        const future = terminal ? 0 : Math.max(...q[next]);
-        q[state][action] += ALPHA * (reward + GAMMA * future - q[state][action]);
-        x = tx;
-        y = ty;
-        steps++;
-        if (terminal || steps >= 200) finishEpisode(terminal);
-    }
-
-    function finishEpisode(reachedGoal) {
-        lastSteps = steps;
-        if (reachedGoal) best = Math.min(best, steps);
-        lastLengths.push(reachedGoal ? steps : 200);
-        if (lastLengths.length > 5) lastLengths.shift();
-        episode++;
-        epsilon = Math.max(EPSILON_FLOOR, epsilon * 0.97);
-        episodeDone = true;
-        converged = epsilon <= EPSILON_FLOOR && best < Infinity &&
-            lastLengths.length === 5 && lastLengths.every(length => length === best);
-    }
-
-    function greedyPath() {
-        const path = new Map();
-        let cx = 0, cy = HEIGHT - 1;
-        const seen = new Set();
-        for (let i = 0; i < 200 && !(cx === WIDTH - 1 && cy === 0); i++) {
-            const state = index(cx, cy);
-            if (seen.has(state)) break;
-            seen.add(state);
-            const max = Math.max(...q[state]);
-            const action = q[state].indexOf(max);
-            const [dx, dy] = ACTIONS[action];
-            const nx = cx + dx, ny = cy + dy;
-            if (!legal(nx, ny)) break;
-            path.set(state, ['↑', '→', '↓', '←'][action]);
-            cx = nx;
-            cy = ny;
-        }
-        return path;
-    }
-
-    function render() {
-        const maxima = [];
-        for (let i = 0; i < visited.length; i++) {
-            if (visited[i]) maxima.push(Math.max(...q[i]));
-        }
-        const min = maxima.length ? Math.min(...maxima) : 0;
-        const max = maxima.length ? Math.max(...maxima) : 0;
-        const ramp = ' .·:-=+';
-        const path = converged ? greedyPath() : new Map();
-        for (let cy = 0; cy < HEIGHT; cy++) {
-            const cells = [];
-            for (let cx = 0; cx < WIDTH; cx++) {
-                if (wall(cx, cy)) {
-                    cells.push('<span class="grid-wall">#</span>');
-                    continue;
-                }
-                const cell = index(cx, cy);
-                if (cx === WIDTH - 1 && cy === 0) {
-                    cells.push('<span class="grid-goal">G</span>');
-                } else if (converged && path.has(cell)) {
-                    cells.push('<span class="agent-path">' + path.get(cell) + '</span>');
-                } else if (!converged && cx === x && cy === y && !episodeDone) {
-                    cells.push('<span class="grid-agent">@</span>');
-                } else if (visited[cell]) {
-                    const value = Math.max(...q[cell]);
-                    const ratio = max === min ? 0 : (value - min) / (max - min);
-                    const rampIndex = Math.min(ramp.length - 1, Math.floor(ratio * (ramp.length - 1)));
-                    cells.push('<span class="grid-value" style="--shade:' + Math.round(ratio * 100) + '%">' + ramp[rampIndex] + '</span>');
-                } else {
-                    cells.push('<span class="grid-value"> </span>');
-                }
-            }
-            rows[cy].innerHTML = cells.join(' ');
-        }
-        statEpisode.textContent = String(episode);
-        statSteps.textContent = String(lastSteps);
-        statEpsilon.textContent = epsilon.toFixed(2);
-        statBest.textContent = best === Infinity ? '—' : String(best);
-        status.textContent = converged ? 'converged' : paused ? 'paused' : 'training';
-    }
-
-    function trainSynchronously() {
-        while (!converged) {
-            const count = Math.min(64, 1 + Math.floor(episode / 3));
-            for (let i = 0; i < count && !converged; i++) trainStep();
-        }
-        render();
-    }
-
-    function requestFrame() {
-        if (!visible || paused || converged || frame) return;
-        frame = requestAnimationFrame(() => {
-            frame = 0;
-            if (!visible || paused || converged) return;
-            const count = Math.min(64, 1 + Math.floor(episode / 3));
-            for (let i = 0; i < count && !converged; i++) trainStep();
-            render();
-            requestFrame();
-        });
-    }
-
-    pauseButton.addEventListener('click', () => {
-        paused = !paused;
-        pauseButton.textContent = paused ? 'resume' : 'pause';
-        pauseButton.setAttribute('aria-pressed', String(paused));
-        if (paused) {
-            cancelAnimationFrame(frame);
-            frame = 0;
-        }
-        else if (visible) {
-            if (reduce) trainSynchronously();
-            else requestFrame();
-        }
-        render();
-    });
-    exhibit.querySelector('[data-agent-reset]').addEventListener('click', reset);
-    window.learningAgent = { reset };
-    io.observe(exhibit);
-    reset();
-})();
-
 // ─── Command line ──────────────────────────
 (() => {
     const bar = document.createElement('section');
@@ -473,7 +224,7 @@ document.querySelectorAll('.toggle[aria-controls]').forEach(btn => {
     bar.append(inner);
     document.body.append(bar);
 
-    const commands = ['help', 'info', 'home', 'feed', 'resume', 'ls', 'open', 'cd', 'whoami', 'goto', 'github', 'linkedin', 'codeforces', 'email', 'train', 'reset', 'clear'];
+    const commands = ['help', 'info', 'home', 'feed', 'resume', 'ls', 'open', 'cd', 'whoami', 'goto', 'github', 'linkedin', 'codeforces', 'email', 'clear'];
     const blogSlugs = ['sre-internship-blog', 'blog-formalization-of-intelligence'];
     const LINK_URLS = {
         github: 'https://github.com/pooravrawat1',
@@ -518,7 +269,7 @@ document.querySelectorAll('.toggle[aria-controls]').forEach(btn => {
         }
         go(page('../blogs/' + clean + '.html'));
     };
-    const externalLinks = () => [...document.querySelectorAll('.chips a.chip')].map(link => [
+    const externalLinks = () => [...document.querySelectorAll('.chips a')].map(link => [
         link.textContent.trim().toLowerCase(), link.href
     ]);
 
@@ -542,7 +293,7 @@ document.querySelectorAll('.toggle[aria-controls]').forEach(btn => {
                 'cd ~ / cd .. — go to index · cd feed — open feed',
                 'whoami — print a short bio · goto <n> or :<n> — jump to line',
                 'github / linkedin / codeforces / email — open a link',
-                'train / reset — restart agent · clear — clear output'
+                'clear — clear output'
             );
         } else if (['info', 'home', 'cd'].includes(command) && (command !== 'cd' || ['~', '..'].includes(arg))) {
             go(page('../index.html'));
@@ -566,9 +317,6 @@ document.querySelectorAll('.toggle[aria-controls]').forEach(btn => {
         } else if (['github', 'linkedin', 'codeforces', 'email'].includes(command)) {
             const match = externalLinks().find(([name]) => name === command);
             window.open(match ? match[1] : LINK_URLS[command], '_blank', 'noopener');
-        } else if (command === 'train' || command === 'reset') {
-            if (window.learningAgent) window.learningAgent.reset();
-            else print('no agent on this page');
         } else if (command === 'clear') {
             output.textContent = '';
         } else {
