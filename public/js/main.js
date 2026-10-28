@@ -1,23 +1,5 @@
 const scriptSrc = document.currentScript ? document.currentScript.src : location.href;
 
-// ─── Theme ─────────────────────────────────
-(() => {
-    const toggle = document.getElementById('theme-toggle');
-    const setTheme = (theme) => {
-        const dark = theme === 'dark';
-        document.documentElement.dataset.theme = dark ? 'dark' : 'light';
-        localStorage.setItem('theme', dark ? 'dark' : 'light');
-        if (toggle) {
-            toggle.textContent = dark ? 'light' : 'dark';
-            toggle.setAttribute('aria-pressed', String(dark));
-        }
-        window.dispatchEvent(new Event('themechange'));
-    };
-    window.setTheme = setTheme;
-    setTheme(document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light');
-    if (toggle) toggle.addEventListener('click', () => setTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'));
-})();
-
 // ─── Line numbers ──────────────────────────
 // Every rendered line gets a number, including the second line of a wrapped row.
 // Without this script the CSS counter still numbers rows.
@@ -182,7 +164,6 @@ document.querySelectorAll('.toggle[aria-controls]').forEach(btn => {
         for (let i = 0; i < lum.length; i++) lum[i] = Math.pow(px[i * 4] / 255, 0.6);
 
         const ctx = canvas.getContext('2d');
-        const dark = document.documentElement.dataset.theme === 'dark';
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
         ctx.clearRect(0, 0, w, h);
         ctx.fillStyle = getComputedStyle(canvas).color;
@@ -191,8 +172,8 @@ document.querySelectorAll('.toggle[aria-controls]').forEach(btn => {
             for (let x = 0; x < cols; x++) {
                 const i = y * cols + x;
                 const v = lum[i];
-                const on = dark ? v >= 0.5 : v < 0.5;
-                const err = v - (on ? (dark ? 1 : 0) : (dark ? 0 : 1));
+                const on = v < 0.5;
+                const err = v - (on ? 0 : 1);
                 if (x + 1 < cols) lum[i + 1] += err * 7 / 16;
                 if (y + 1 < rows) {
                     if (x > 0) lum[i + cols - 1] += err * 3 / 16;
@@ -210,7 +191,6 @@ document.querySelectorAll('.toggle[aria-controls]').forEach(btn => {
 
     img.addEventListener('load', draw);
     new ResizeObserver(draw).observe(canvas);
-    window.addEventListener('themechange', draw);
 })();
 
 // ─── Exhibit meters ────────────────────────
@@ -493,7 +473,7 @@ document.querySelectorAll('.toggle[aria-controls]').forEach(btn => {
     bar.append(inner);
     document.body.append(bar);
 
-    const commands = ['help', 'info', 'home', 'feed', 'resume', 'ls', 'open', 'cd', 'whoami', 'theme', 'dark', 'light', 'goto', 'github', 'linkedin', 'codeforces', 'email', 'train', 'reset', 'clear'];
+    const commands = ['help', 'info', 'home', 'feed', 'resume', 'ls', 'open', 'cd', 'whoami', 'goto', 'github', 'linkedin', 'codeforces', 'email', 'train', 'reset', 'clear'];
     const blogSlugs = ['sre-internship-blog', 'blog-formalization-of-intelligence'];
     const LINK_URLS = {
         github: 'https://github.com/pooravrawat1',
@@ -560,8 +540,7 @@ document.querySelectorAll('.toggle[aria-controls]').forEach(btn => {
                 'feed — open feed · resume — open resume pdf',
                 'ls [blogs] — list pages or blog slugs · open <slug> — open a blog',
                 'cd ~ / cd .. — go to index · cd feed — open feed',
-                'whoami — print a short bio · theme [dark|light] — change theme',
-                'dark / light — set theme · goto <n> or :<n> — jump to line',
+                'whoami — print a short bio · goto <n> or :<n> — jump to line',
                 'github / linkedin / codeforces / email — open a link',
                 'train / reset — restart agent · clear — clear output'
             );
@@ -581,14 +560,6 @@ document.querySelectorAll('.toggle[aria-controls]').forEach(btn => {
             navigateBlog(arg.slice('blogs/'.length));
         } else if (command === 'whoami') {
             print('poorav rawat — cs @ georgia state. ai/ml research + software engineering.');
-        } else if (command === 'theme') {
-            const current = document.documentElement.dataset.theme;
-            const next = arg === 'dark' || arg === 'light' ? arg : (current === 'dark' ? 'light' : 'dark');
-            window.setTheme(next);
-            print('theme: ' + next);
-        } else if (command === 'dark' || command === 'light') {
-            window.setTheme(command);
-            print('theme: ' + command);
         } else if (command === 'goto' || /^:\d+$/.test(command)) {
             const line = command[0] === ':' ? command.slice(1) : arg;
             if (!window.siteLines?.jump(line)) print('line not found: ' + line);

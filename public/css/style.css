@@ -5,23 +5,13 @@
     --gutter: #8a8a8a;
     --faint: #c9c9c9;
     --muted: #595959;
-    --accent: #ff4f00;
+    --accent: #00a83e;
     --mono: "Source Code Pro", ui-monospace, Menlo, monospace;
     --lh: 1.8;
 }
 
 html {
     color-scheme: light;
-}
-
-html[data-theme="dark"] {
-    color-scheme: dark;
-    --ink: #f2f2f2;
-    --paper: #0a0a0a;
-    --gutter: #747474;
-    --faint: #3d3d3d;
-    --muted: #a6a6a6;
-    --accent: #ff4f00;
 }
 
 *,
@@ -266,8 +256,28 @@ a.chip:focus-visible {
 
 .nav {
     display: flex;
+    flex: 1 1 auto;
     flex-wrap: wrap;
     column-gap: 1ch;
+    justify-content: flex-end;
+}
+
+.nav .chip {
+    border: 0;
+    background: transparent;
+    color: var(--muted);
+}
+
+.nav .chip[aria-current="page"] {
+    color: var(--ink);
+}
+
+.nav .chip:hover,
+.nav .chip:focus-visible {
+    background: transparent;
+    color: var(--accent);
+    outline: none;
+    text-decoration: none;
 }
 
 .chips {
@@ -366,15 +376,10 @@ a.chip:focus-visible {
     --gutter: #747474;
     --faint: #3d3d3d;
     --muted: #a6a6a6;
-    --accent: #ff4f00;
+    --accent: #00a83e;
     background: var(--paper);
     color: var(--ink);
     padding: calc(var(--lh) * 1em) 0;
-}
-
-html[data-theme="dark"] .screen {
-    --paper: #161616;
-    border-block: 1px solid var(--faint);
 }
 
 .meter {
