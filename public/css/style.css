@@ -199,12 +199,13 @@ h1 {
     display: flex;
     flex: 1 1 auto;
     flex-wrap: wrap;
-    column-gap: 1ch;
+    column-gap: 2.5ch;
     justify-content: flex-start;
 }
 
 .nav a {
     color: var(--muted);
+    font-style: italic;
     text-decoration: none;
 }
 
