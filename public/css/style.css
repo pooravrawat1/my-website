@@ -193,6 +193,7 @@ h1 {
 .prose h2 {
     text-align: left;
     text-transform: uppercase;
+    font-weight: 700;
 }
 
 .nav {
