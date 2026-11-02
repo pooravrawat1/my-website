@@ -147,7 +147,7 @@ h1 {
 }
 
 .gap {
-    margin-top: .5em;
+    margin-top: calc(var(--lh) * 1.5em);
 }
 
 .indent {
