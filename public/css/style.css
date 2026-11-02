@@ -206,6 +206,10 @@ h1 {
     text-decoration: none;
 }
 
+.nav a::before {
+    content: "#";
+}
+
 .nav a[aria-current="page"] {
     color: var(--ink);
 }
