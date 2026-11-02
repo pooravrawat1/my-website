@@ -146,10 +146,6 @@ h1 {
     display: none;
 }
 
-.gap {
-    margin-top: calc(var(--lh) * 1.5em);
-}
-
 .indent {
     padding-left: 2ch;
 }
