@@ -126,7 +126,7 @@ document.querySelectorAll('.toggle[aria-controls]').forEach(btn => {
         btn.setAttribute('aria-expanded', String(open));
         target.hidden = !open;
         const mk = btn.querySelector('.mk');
-        if (mk) mk.textContent = open ? '[-]' : '[+]';
+        if (mk) mk.textContent = open ? '▾' : '▸';
     });
 });
 
