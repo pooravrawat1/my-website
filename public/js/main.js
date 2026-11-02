@@ -164,12 +164,15 @@ document.querySelectorAll('.toggle[aria-controls]').forEach(btn => {
         const fy = Math.max(0, Math.min(1, focus[1] || 0)) * img.naturalHeight;
         const sx = Math.max(0, Math.min(img.naturalWidth - sw, fx - sw / 2));
         const sy = Math.max(0, Math.min(img.naturalHeight - sh, fy - sh / 2));
-        o.filter = 'grayscale(1) brightness(1.15) contrast(1.35)';
         o.drawImage(img, sx, sy, sw, sh, 0, 0, cols, rows);
         const px = o.getImageData(0, 0, cols, rows).data;
 
         const lum = new Float32Array(cols * rows);
-        for (let i = 0; i < lum.length; i++) lum[i] = Math.pow(px[i * 4] / 255, 0.6);
+        for (let i = 0; i < lum.length; i++) {
+            const g = (0.2126 * px[i * 4] + 0.7152 * px[i * 4 + 1] + 0.0722 * px[i * 4 + 2]) / 255;
+            const v = Math.max(0, Math.min(1, (Math.min(1, g * 1.15) - 0.5) * 1.35 + 0.5));
+            lum[i] = Math.pow(v, 0.6);
+        }
 
         const ctx = canvas.getContext('2d');
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
