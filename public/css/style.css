@@ -247,7 +247,6 @@ h1 {
     text-align: left;
     text-transform: inherit;
     cursor: pointer;
-    padding-left: 2ch;
 }
 
 .tx:has(.toggle) {
