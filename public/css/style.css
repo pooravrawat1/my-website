@@ -165,6 +165,10 @@ h1 {
 .tagline p {
     font-weight: 700;
     font-style: italic;
+}
+
+.tagline p,
+.sq {
     text-decoration: underline wavy var(--accent);
     text-decoration-thickness: 1px;
     text-underline-offset: 4px;
