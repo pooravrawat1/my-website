@@ -247,14 +247,19 @@ h1 {
     text-align: left;
     text-transform: inherit;
     cursor: pointer;
-    padding-left: 4ch;
-    text-indent: -4ch;
+    padding-left: 2ch;
+}
+
+.tx:has(.toggle) {
+    padding-right: 3ch;
 }
 
 .toggle .mk {
-    display: inline-block;
-    width: 4ch;
-    text-indent: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 2ch;
+    text-align: right;
     color: var(--muted);
 }
 
