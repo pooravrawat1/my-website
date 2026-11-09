@@ -255,6 +255,10 @@ h1 {
     padding-left: 2ch;
 }
 
+.flush .toggle {
+    padding-left: 0;
+}
+
 .tx:has(.toggle) {
     padding-right: 3ch;
 }
