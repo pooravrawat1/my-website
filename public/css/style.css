@@ -158,6 +158,10 @@ h1 {
     color: var(--muted);
 }
 
+.detail p {
+    font-style: italic;
+}
+
 .tagline p {
     font-weight: 700;
     font-style: italic;
