@@ -54,7 +54,8 @@ h1, h2, h3, p, figure {
     margin: 0;
 }
 
-h1 {
+h1,
+.section-heading h2 {
     display: inline;
     text-align: left;
     padding: 0 .5ch;
@@ -201,7 +202,10 @@ h1 {
     display: block;
 }
 
-.section-heading h2,
+.section-heading h2 {
+    font-weight: 700;
+}
+
 .prose h2 {
     text-align: left;
     text-transform: uppercase;
