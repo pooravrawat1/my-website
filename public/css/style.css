@@ -158,6 +158,22 @@ h1 {
     color: var(--muted);
 }
 
+.detail p {
+    font-style: italic;
+}
+
+.tagline p {
+    font-weight: 700;
+    font-style: italic;
+}
+
+.tagline p,
+.sq {
+    text-decoration: underline wavy var(--accent);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
+}
+
 /* Two-column table rows: entry on the left, date on the right. */
 .tx {
     display: grid;
@@ -247,14 +263,23 @@ h1 {
     text-align: left;
     text-transform: inherit;
     cursor: pointer;
-    padding-left: 4ch;
-    text-indent: -4ch;
+    padding-left: 2ch;
+}
+
+.flush .toggle {
+    padding-left: 0;
+}
+
+.tx:has(.toggle) {
+    padding-right: 3ch;
 }
 
 .toggle .mk {
-    display: inline-block;
-    width: 4ch;
-    text-indent: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 2ch;
+    text-align: right;
     color: var(--muted);
 }
 
