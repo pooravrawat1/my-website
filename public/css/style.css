@@ -294,8 +294,13 @@ h1,
     padding-left: 0;
 }
 
-.tx:has(.toggle) {
+.tx:has(.toggle),
+.kv3 {
     padding-right: 3ch;
+}
+
+.proj-detail {
+    padding-left: 6ch;
 }
 
 .toggle .mk {
