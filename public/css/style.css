@@ -12,6 +12,21 @@
 
 html {
     color-scheme: light;
+    scrollbar-color: var(--faint) transparent;
+}
+
+::-webkit-scrollbar {
+    background: transparent;
+}
+
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-corner {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--faint);
+    border-radius: 999px;
 }
 
 *,
@@ -158,7 +173,8 @@ h1 {
     color: var(--muted);
 }
 
-.detail p {
+.detail p,
+.company span {
     font-style: italic;
 }
 
@@ -264,6 +280,13 @@ h1 {
     text-transform: inherit;
     cursor: pointer;
     padding-left: 2ch;
+}
+
+/* Stretch the button's hit area over its whole row. */
+.toggle::after {
+    content: "";
+    position: absolute;
+    inset: 0;
 }
 
 .flush .toggle {
