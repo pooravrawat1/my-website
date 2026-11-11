@@ -124,9 +124,16 @@ document.querySelectorAll('.toggle[aria-controls]').forEach(btn => {
         if (!target) return;
         const open = btn.getAttribute('aria-expanded') !== 'true';
         btn.setAttribute('aria-expanded', String(open));
-        target.hidden = !open;
         const mk = btn.querySelector('.mk');
         if (mk) mk.textContent = open ? '▾' : '▸';
+        if (target._anim) target._anim.cancel();
+        if (matchMedia('(prefers-reduced-motion: reduce)').matches) { target.hidden = !open; return; }
+        target.hidden = false;
+        const shut = { height: '0px', minHeight: '0px', opacity: 0, overflow: 'hidden' };
+        const full = { height: target.scrollHeight + 'px', minHeight: '0px', opacity: 1, overflow: 'hidden' };
+        const anim = target.animate(open ? [shut, full] : [full, shut], { duration: 280, easing: 'ease-in-out' });
+        target._anim = anim;
+        anim.onfinish = () => { target._anim = null; target.hidden = !open; };
     });
 });
 
