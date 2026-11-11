@@ -303,6 +303,27 @@ h1,
     padding-left: 6ch;
 }
 
+.proj-detail p {
+    flex: 1 1 100%;
+}
+
+.proj-links {
+    display: inline-flex;
+    align-items: center;
+    column-gap: 1.5ch;
+    height: calc(var(--lh) * 1em);
+}
+
+.proj-links a {
+    display: inline-flex;
+}
+
+.proj-links svg {
+    width: 1.1em;
+    height: 1.1em;
+    fill: currentColor;
+}
+
 .toggle .mk {
     position: absolute;
     top: 0;
