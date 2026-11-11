@@ -178,9 +178,13 @@ h1,
 .tagline p {
     font-weight: 700;
     font-style: italic;
-    text-decoration: underline currentColor;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 4px;
+}
+
+.tagline .ul {
+    padding-bottom: 2px;
+    background: linear-gradient(currentColor, currentColor) left bottom / 100% 1px no-repeat;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
 }
 
 .sq {

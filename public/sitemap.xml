@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://pooravrawat.vercel.app/</loc>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://pooravrawat.vercel.app/feed</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://pooravrawat.vercel.app/blogs/blog-formalization-of-intelligence</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://pooravrawat.vercel.app/blogs/sre-internship-blog</loc>
+    <priority>0.6</priority>
+  </url>
+</urlset>

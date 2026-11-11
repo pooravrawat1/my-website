@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://pooravrawat.vercel.app/sitemap.xml
